@@ -19,7 +19,28 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: "Yahiaoui Abderrahmane | Security & Infrastructure",
-  description: "Cyber Security Master's Student & Instructor | Backend & Web Automation Developer",
+  description: "Cyber Security Master's Student & Instructor | Infrastructure, DevOps, and Automation Developer",
+  openGraph: {
+    title: "Yahiaoui Abderrahmane | Security & Infrastructure",
+    description: "Cyber Security Master's Student & Instructor | Infrastructure, DevOps, and Web Automation Developer",
+    url: "https://abdo30004.github.io/",
+    siteName: "Yahiaoui Abderrahmane - Portfolio",
+    images: [
+      {
+        url: "https://abdo30004.github.io/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Cybersecurity & DevOps Engineering Portfolio",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Yahiaoui Abderrahmane | Security & Infrastructure",
+    description: "Cyber Security Master's Student & Instructor | Infrastructure, DevOps, and Automation Developer",
+    images: ["https://abdo30004.github.io/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({
