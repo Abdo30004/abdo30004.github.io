@@ -23,7 +23,7 @@ export const PROJECTS = [
     role: "Infrastructure Lead",
     date: "2025",
     desc: "Orchestrated Docker infrastructure for MCTF 5.0 with per-team isolation, dynamic port allocation, and Prometheus metrics.",
-    tags: ["Python", "React", "Docker", "Traefik", "PostgreSQL"],
+    tags: ["Python", "Docker", "Traefik", "PostgreSQL"],
     status: "operational",
     url: "https://github.com/Abdo30004/mctf-instancer",
     blogUrl: "https://mctf-blog.microclub.info/posts/organizing-mctf-infrastructure"
