@@ -8,19 +8,19 @@ type Lang = "en" | "ar" | "fr";
 const QUOTES: Record<Lang, { text: string, author: string, fontClass: string, dir: "ltr" | "rtl" }> = {
   ar: {
     text: "« أَحَبُّ الأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا وَإِنْ قَلَّ »",
-    author: "— رسول الله ﷺ (رواه البخاري ومسلم)",
+    author: "رسول الله ﷺ",
     fontClass: "font-sans text-lg md:text-xl font-medium",
     dir: "rtl"
   },
   fr: {
     text: `"Les actes les plus aimés d'Allah sont les plus constants, même s'ils sont minimes."`,
-    author: "— Prophète Muhammad (ﷺ) (Boukhari & Mouslim)",
+    author: "Prophète Muhammad (ﷺ)",
     fontClass: "font-mono text-xs md:text-sm",
     dir: "ltr"
   },
   en: {
     text: `"The most beloved of deeds to Allah are those that are most consistent, even if they are small."`,
-    author: "— Prophet Muhammad (ﷺ) (Bukhari & Muslim)",
+    author: "Prophet Muhammad (ﷺ)",
     fontClass: "font-mono text-xs md:text-sm",
     dir: "ltr"
   }
