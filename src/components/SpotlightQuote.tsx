@@ -19,39 +19,30 @@ export function SpotlightQuote() {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setOpacity(1)}
       onMouseLeave={() => setOpacity(0)}
-      className="relative w-full min-h-[140px] mt-auto bg-slate-950/50 rounded-xl border border-slate-800/60 flex items-center justify-center overflow-hidden cursor-crosshair p-6 transition-all duration-500"
+      className="relative w-full flex-1 min-h-[120px] mt-8 flex flex-col items-center justify-center overflow-hidden cursor-crosshair"
     >
-      {/* Background hidden text (barely visible to hint it's there) */}
-      <p className="text-xs md:text-sm font-mono text-slate-800/40 text-center select-none pointer-events-none transition-opacity duration-300">
+      {/* Background hidden text */}
+      <p className="text-xs md:text-sm font-mono text-slate-800/30 text-center select-none pointer-events-none italic leading-relaxed">
         "The only truly secure system is one that is powered off, cast in a block of concrete and sealed in a lead-lined room with armed guards - and even then I have my doubts."
         <br /><br />
-        <span className="text-slate-800/30">— Gene Spafford</span>
+        <span className="text-slate-800/20">— Gene Spafford</span>
       </p>
 
       {/* Spotlight revealed text using CSS masking */}
       <div
-        className="absolute inset-0 pointer-events-none flex items-center justify-center p-6 transition-opacity duration-200"
+        className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center transition-opacity duration-200"
         style={{
           opacity: opacity,
           WebkitMaskImage: `radial-gradient(140px circle at ${position.x}px ${position.y}px, black 15%, transparent 100%)`,
           maskImage: `radial-gradient(140px circle at ${position.x}px ${position.y}px, black 15%, transparent 100%)`
         }}
       >
-        <p className="text-xs md:text-sm font-mono text-cyan-400 text-center drop-shadow-[0_0_8px_rgba(6,182,212,0.6)] leading-relaxed">
+        <p className="text-xs md:text-sm font-mono text-cyan-400 text-center italic leading-relaxed drop-shadow-[0_0_8px_rgba(6,182,212,0.6)]">
           "The only truly secure system is one that is powered off, cast in a block of concrete and sealed in a lead-lined room with armed guards - and even then I have my doubts."
           <br /><br />
-          <span className="text-cyan-600 font-bold">— Gene Spafford</span>
+          <span className="text-cyan-600/80 font-bold">— Gene Spafford</span>
         </p>
       </div>
-
-      {/* Subtle ambient glow tracking mouse */}
-      <div 
-        className="absolute inset-0 pointer-events-none transition-opacity duration-200 mix-blend-screen"
-        style={{
-          opacity: opacity,
-          background: `radial-gradient(150px circle at ${position.x}px ${position.y}px, rgba(6, 182, 212, 0.08), transparent 80%)`,
-        }}
-      />
     </div>
   );
 }
