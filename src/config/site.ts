@@ -53,7 +53,7 @@ export const PROJECTS = [
     desc: "Autonomous aquafarm monitoring with IoT sensors, RAG, and AI disease detection. 1st Place Junction X Algiers 2025.",
     tags: ["IoT", "AI", "Backend"],
     status: "archived",
-    url: "https://github.com/Abdo30004"
+    url: "https://github.com/orgs/aqua-sense-junction"
   }
 ];
 
