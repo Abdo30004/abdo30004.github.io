@@ -15,6 +15,7 @@ import { LiveTelemetry } from "@/components/LiveTelemetry";
 import { Widget } from "@/components/Widget";
 import { ProjectBackground } from "@/components/ProjectAnimations";
 import { SplashScreen } from "@/components/SplashScreen";
+import { SpotlightQuote } from "@/components/SpotlightQuote";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import { siteConfig, SKILLS, PROJECTS, PIPELINE_STAGES } from "@/config/site";
 import { 
@@ -229,6 +230,7 @@ export default function Home() {
               </div>
             ))}
           </div>
+          <SpotlightQuote />
         </Widget>
 
       </motion.div>
