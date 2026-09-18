@@ -167,7 +167,7 @@ export default function Home() {
 
         {/* Competencies */}
         <Widget className="md:col-span-4" title="Core_Competencies" icon={Cpu}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-6">
               {Object.entries(SKILLS).map(([category, items]) => {
                 const Icon = CATEGORY_ICONS[category];
                 return (
