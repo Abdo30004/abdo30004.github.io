@@ -75,7 +75,7 @@ export function SpotlightQuote() {
       onMouseEnter={() => setOpacity(1)}
       onMouseLeave={() => setOpacity(0)}
       dir={currentQuote.dir}
-      className="relative w-full flex-1 min-h-[120px] mt-8 flex flex-col items-center justify-center overflow-hidden cursor-crosshair"
+      className="relative w-full flex-1 min-h-[120px] mt-8 flex flex-col items-center justify-center overflow-hidden cursor-crosshair group"
     >
       {/* Background hidden text */}
       <p className={cn(currentQuote.fontClass, "text-slate-800/30 text-center select-none pointer-events-none italic leading-relaxed")}>
@@ -84,9 +84,9 @@ export function SpotlightQuote() {
         <span className="text-slate-800/20">{currentQuote.author}</span>
       </p>
 
-      {/* Spotlight revealed text using CSS masking */}
+      {/* Spotlight revealed text using CSS masking (Mouse) */}
       <div
-        className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center transition-opacity duration-200"
+        className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center transition-opacity duration-200 hidden sm:flex"
         style={{
           opacity: opacity,
           WebkitMaskImage: `radial-gradient(150px circle at ${position.x}px ${position.y}px, black 15%, transparent 100%)`,
@@ -97,6 +97,18 @@ export function SpotlightQuote() {
           {currentQuote.text}
           <br /><br />
           <span className="text-cyan-600/80 font-bold">{currentQuote.author}</span>
+        </p>
+      </div>
+
+      {/* Endless Shine revealed text (Mobile/Touch) */}
+      <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center sm:hidden animate-pulse">
+        <div 
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent"
+        />
+        <p className={cn(currentQuote.fontClass, "text-cyan-400/80 text-center italic leading-relaxed drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]")}>
+          {currentQuote.text}
+          <br /><br />
+          <span className="text-cyan-600/90 font-bold">{currentQuote.author}</span>
         </p>
       </div>
     </div>

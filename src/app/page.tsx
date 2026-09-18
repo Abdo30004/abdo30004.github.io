@@ -3,11 +3,11 @@
 import { 
   Terminal, Server, 
   Mail, Cpu, GitMerge, CheckCircle2, Loader2, CircleDashed,
-  Code2, Database, Cloud, Shield, Network, ShieldAlert, Flag, BrainCircuit, Bot
+  Code2, Database, Cloud, Shield, Network, ShieldAlert, Flag, BrainCircuit, Bot, ExternalLink
 } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 import NetworkBackground from "@/components/NetworkBackground";
@@ -75,10 +75,21 @@ const SKILL_ICONS: Record<string, React.ElementType> = {
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
 
+  useEffect(() => {
+    if (sessionStorage.getItem("boot_sequence_played")) {
+      setShowSplash(false);
+    }
+  }, []);
+
+  const handleSplashComplete = () => {
+    sessionStorage.setItem("boot_sequence_played", "true");
+    setShowSplash(false);
+  };
+
   return (
     <>
       <AnimatePresence>
-        {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
+        {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
       </AnimatePresence>
 
       <main className="min-h-screen p-4 md:p-8 max-w-7xl mx-auto space-y-6 relative">
@@ -156,7 +167,7 @@ export default function Home() {
 
         {/* Competencies */}
         <Widget className="md:col-span-4" title="Core_Competencies" icon={Cpu}>
-            <div className="flex flex-col gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {Object.entries(SKILLS).map(([category, items]) => {
                 const Icon = CATEGORY_ICONS[category];
                 return (
@@ -192,8 +203,9 @@ export default function Home() {
               <div key={i} className="group/item flex flex-col p-4 rounded-lg bg-slate-900/50 border border-slate-800/50 hover:bg-slate-800/80 transition-colors z-10 relative overflow-hidden">
                 <ProjectBackground projectName={project.name} />
                 <div className="flex items-start justify-between mb-3 relative z-10">
-                  <Link href={project.url} target="_blank" className="font-display font-medium text-slate-200 group-hover/item:text-cyan-400 transition-colors hover:underline">
+                  <Link href={project.url} target="_blank" className="font-display font-medium text-slate-200 group-hover/item:text-cyan-400 transition-colors hover:underline flex items-center gap-1.5">
                     {project.name}
+                    <ExternalLink className="w-3.5 h-3.5 opacity-50 group-hover/item:opacity-100" />
                   </Link>
                   <div className="flex items-center gap-2">
                     {project.blogUrl && (
