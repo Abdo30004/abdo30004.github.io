@@ -118,23 +118,23 @@ export default function Home() {
                   <Link href={project.url} target="_blank" className="font-display font-medium text-slate-200 group-hover/item:text-cyan-400 transition-colors hover:underline">
                     {project.name}
                   </Link>
-                  <span className="flex items-center gap-1.5 text-[10px] font-mono text-slate-500 uppercase px-2 py-0.5 rounded-full border border-slate-700/50">
-                    {project.status === 'operational' && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></span>}
-                    {project.status === 'beta' && <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>}
-                    {project.status === 'archived' && <span className="w-1.5 h-1.5 rounded-full bg-slate-500"></span>}
-                    {project.status}
-                  </span>
-                </div>
-                  <p className="text-sm text-slate-400 mb-4 flex-1 relative z-10">
-                    {project.desc}
+                  <div className="flex items-center gap-2">
                     {project.blogUrl && (
-                      <span className="block mt-3">
-                        <Link href={project.blogUrl} target="_blank" className="font-mono text-[10px] text-cyan-400/80 hover:text-cyan-300 transition-colors flex items-center gap-1.5 w-max px-2 py-1 bg-cyan-950/30 border border-cyan-500/20 rounded">
-                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse"></span>
-                          [READ_WRITEUP]
-                        </Link>
-                      </span>
+                      <Link href={project.blogUrl} target="_blank" className="font-mono text-[9px] text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-1 px-1.5 py-0.5 bg-cyan-950/50 border border-cyan-500/30 rounded">
+                        <span className="w-1 h-1 rounded-full bg-cyan-500 animate-pulse"></span>
+                        WRITEUP
+                      </Link>
                     )}
+                    <span className="flex items-center gap-1.5 text-[10px] font-mono text-slate-500 uppercase px-2 py-0.5 rounded-full border border-slate-700/50">
+                      {project.status === 'operational' && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></span>}
+                      {project.status === 'beta' && <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>}
+                      {project.status === 'archived' && <span className="w-1.5 h-1.5 rounded-full bg-slate-500"></span>}
+                      {project.status}
+                    </span>
+                  </div>
+                </div>
+                  <p className="text-sm text-slate-400 mb-10 flex-1 relative z-10">
+                    {project.desc}
                   </p>
                 <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-800/80 relative z-10">
                   <span className="text-xs font-mono text-slate-500">{project.role}</span>
