@@ -2,22 +2,76 @@
 
 import { 
   Terminal, Server, 
-  Mail, Cpu, GitMerge, CheckCircle2, Loader2, CircleDashed
+  Mail, Cpu, GitMerge, CheckCircle2, Loader2, CircleDashed,
+  Code2, Database, Cloud, Shield, Network, ShieldAlert, Flag, BrainCircuit
 } from "lucide-react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 import NetworkBackground from "@/components/NetworkBackground";
 import { LiveTelemetry } from "@/components/LiveTelemetry";
 import { Widget } from "@/components/Widget";
 import { ProjectBackground } from "@/components/ProjectAnimations";
+import { SplashScreen } from "@/components/SplashScreen";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import { siteConfig, SKILLS, PROJECTS, PIPELINE_STAGES } from "@/config/site";
+import { 
+  SiTypescript, SiJavascript, SiPython, SiRust, SiC, 
+  SiExpress, SiNestjs, SiFastapi, SiFlask, 
+  SiDocker, SiKubernetes, SiTerraform, SiGooglecloud, SiGithubactions, SiNginx, SiGrafana,
+  SiOwasp, SiHackthebox, SiWireshark,
+  SiReact, SiTraefikproxy, SiPostgresql
+} from "react-icons/si";
+
+const CATEGORY_ICONS: Record<string, React.ElementType> = {
+  "Languages": Code2,
+  "Backend": Database,
+  "Infrastructure": Cloud,
+  "Security": Shield
+};
+
+const SKILL_ICONS: Record<string, React.ElementType> = {
+  "TypeScript": SiTypescript,
+  "JavaScript": SiJavascript,
+  "Python": SiPython,
+  "Rust": SiRust,
+  "C": SiC,
+  "Express.js": SiExpress,
+  "Nest.js": SiNestjs,
+  "FastAPI": SiFastapi,
+  "Flask": SiFlask,
+  "Microservices": Network,
+  "Docker": SiDocker,
+  "K8s": SiKubernetes,
+  "Terraform": SiTerraform,
+  "GCP": SiGooglecloud,
+  "CI/CD": SiGithubactions,
+  "Nginx": SiNginx,
+  "Grafana": SiGrafana,
+  "Web Security": SiOwasp,
+  "CTF": Flag,
+  "Network Security": SiWireshark,
+  "React": SiReact,
+  "Traefik": SiTraefikproxy,
+  "PostgreSQL": SiPostgresql,
+  "Terminal": Terminal,
+  "IoT": Cpu,
+  "AI": BrainCircuit,
+  "Backend": Database
+};
 
 export default function Home() {
+  const [showSplash, setShowSplash] = useState(true);
+
   return (
-    <main className="min-h-screen p-4 md:p-8 max-w-7xl mx-auto space-y-6 relative">
+    <>
+      <AnimatePresence>
+        {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
+      </AnimatePresence>
+
+      <main className="min-h-screen p-4 md:p-8 max-w-7xl mx-auto space-y-6 relative">
       <NetworkBackground />
       
       <LiveTelemetry />
@@ -92,20 +146,33 @@ export default function Home() {
 
         {/* Competencies */}
         <Widget className="md:col-span-4" title="Core_Competencies" icon={Cpu}>
-          <div className="flex flex-col gap-6">
-            {Object.entries(SKILLS).map(([category, items]) => (
-              <div key={category}>
-                <h3 className="text-xs font-mono text-slate-500 mb-3 uppercase tracking-wider">{category}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {items.map(skill => (
-                    <span key={skill} className="px-2.5 py-1 rounded bg-slate-800/50 text-slate-300 text-xs font-mono border border-slate-700/50 hover:border-cyan-500/50 hover:text-cyan-400 transition-colors cursor-default">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+            <div className="flex flex-col gap-6">
+              {Object.entries(SKILLS).map(([category, items]) => {
+                const Icon = CATEGORY_ICONS[category];
+                return (
+                  <div key={category}>
+                    <h3 className="text-xs font-mono text-cyan-500/80 mb-3 uppercase tracking-wider flex items-center gap-2">
+                      {Icon && <Icon className="w-3.5 h-3.5" />}
+                      {category}
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {items.map(skill => {
+                        const SkillIcon = SKILL_ICONS[skill];
+                        return (
+                          <span 
+                            key={skill} 
+                            className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800/50 text-slate-300 text-xs font-mono border border-slate-700/50 hover:border-cyan-500/50 hover:text-cyan-400 transition-colors cursor-default"
+                          >
+                            {SkillIcon && <SkillIcon className="w-3.5 h-3.5" />}
+                            {skill}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
         </Widget>
 
         {/* Projects / Deployments */}
@@ -138,13 +205,17 @@ export default function Home() {
                   </p>
                 <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-800/80 relative z-10">
                   <span className="text-xs font-mono text-slate-500">{project.role}</span>
-                  <div className="flex gap-1.5">
-                    {project.tags.slice(0, 3).map(tag => (
-                      <span key={tag} className="text-[10px] font-mono text-slate-400 bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                    <div className="flex gap-1.5">
+                      {project.tags.slice(0, 3).map(tag => {
+                        const TagIcon = SKILL_ICONS[tag];
+                        return (
+                          <span key={tag} className="flex items-center gap-1 text-[10px] font-mono text-slate-400 bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800">
+                            {TagIcon && <TagIcon className="w-3 h-3" />}
+                            {tag}
+                          </span>
+                        );
+                      })}
+                    </div>
                 </div>
               </div>
             ))}
@@ -164,5 +235,6 @@ export default function Home() {
         </p>
       </motion.footer>
     </main>
+    </>
   );
 }
