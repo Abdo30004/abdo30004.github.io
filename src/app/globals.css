@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  
+  --color-cyan-500: #06b6d4;
+  --color-cyan-400: #22d3ee;
+}
+
+@layer base {
+  :root {
+    --background: #0b0f19;
+    --foreground: #f8fafc;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    background-image: 
+      linear-gradient(to right, rgba(51, 65, 85, 0.15) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(51, 65, 85, 0.15) 1px, transparent 1px);
+    background-size: 32px 32px;
+    font-family: var(--font-sans);
+  }
+}

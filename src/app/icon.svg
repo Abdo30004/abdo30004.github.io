@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Outer Node (Rotated Square) -->
+  <rect x="12" y="12" width="40" height="40" fill="none" stroke="#06b6d4" stroke-width="4" transform="rotate(45 32 32)" rx="2" />
+  
+  <!-- Inner Node (Rotated Square) -->
+  <rect x="22" y="22" width="20" height="20" fill="none" stroke="#22d3ee" stroke-width="3" transform="rotate(45 32 32)" rx="1" />
+  
+  <!-- Core Processor -->
+  <circle cx="32" cy="32" r="4" fill="#67e8f9" />
+  
+  <!-- Connection Terminals (Top, Bottom, Left, Right) -->
+  <circle cx="32" cy="3.7" r="3.5" fill="#06b6d4" />
+  <circle cx="32" cy="60.3" r="3.5" fill="#06b6d4" />
+  <circle cx="3.7" cy="32" r="3.5" fill="#06b6d4" />
+  <circle cx="60.3" cy="32" r="3.5" fill="#06b6d4" />
+</svg>
