@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
-type Lang = "en" | "ar" | "fr";
+type Lang = "en" | "ar" | "fr" | "es" | "de";
 
 const QUOTES: Record<Lang, { text: string, author: string, fontClass: string, dir: "ltr" | "rtl" }> = {
   ar: {
@@ -15,6 +15,18 @@ const QUOTES: Record<Lang, { text: string, author: string, fontClass: string, di
   fr: {
     text: `"Les actes les plus aimés d'Allah sont les plus constants, même s'ils sont minimes."`,
     author: "Prophète Muhammad (ﷺ)",
+    fontClass: "font-mono text-xs md:text-sm",
+    dir: "ltr"
+  },
+  es: {
+    text: `"Las acciones más amadas por Allah son las constantes, aunque sean pequeñas."`,
+    author: "Profeta Muhammad (ﷺ)",
+    fontClass: "font-mono text-xs md:text-sm",
+    dir: "ltr"
+  },
+  de: {
+    text: `"Die beliebtesten Taten bei Allah sind jene, die beständig sind, auch wenn sie gering sind."`,
+    author: "Prophet Muhammad (ﷺ)",
     fontClass: "font-mono text-xs md:text-sm",
     dir: "ltr"
   },
@@ -39,6 +51,10 @@ export function SpotlightQuote() {
       setLang("ar");
     } else if (userLang.startsWith("fr")) {
       setLang("fr");
+    } else if (userLang.startsWith("es")) {
+      setLang("es");
+    } else if (userLang.startsWith("de")) {
+      setLang("de");
     } else {
       setLang("en");
     }
