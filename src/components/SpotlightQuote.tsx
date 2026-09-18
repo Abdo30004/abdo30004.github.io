@@ -1,11 +1,48 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { cn } from "@/lib/utils";
+
+type Lang = "en" | "ar" | "fr";
+
+const QUOTES: Record<Lang, { text: string, author: string, fontClass: string, dir: "ltr" | "rtl" }> = {
+  ar: {
+    text: "« أَحَبُّ الأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا وَإِنْ قَلَّ »",
+    author: "— رسول الله ﷺ (رواه البخاري ومسلم)",
+    fontClass: "font-sans text-lg md:text-xl font-medium",
+    dir: "rtl"
+  },
+  fr: {
+    text: `"Les actes les plus aimés d'Allah sont les plus constants, même s'ils sont minimes."`,
+    author: "— Prophète Muhammad (ﷺ) (Boukhari & Mouslim)",
+    fontClass: "font-mono text-xs md:text-sm",
+    dir: "ltr"
+  },
+  en: {
+    text: `"The most beloved of deeds to Allah are those that are most consistent, even if they are small."`,
+    author: "— Prophet Muhammad (ﷺ) (Bukhari & Muslim)",
+    fontClass: "font-mono text-xs md:text-sm",
+    dir: "ltr"
+  }
+};
 
 export function SpotlightQuote() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
+  const [lang, setLang] = useState<Lang>("en");
   const divRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Detect browser language on the client side
+    const userLang = navigator.language.toLowerCase();
+    if (userLang.startsWith("ar")) {
+      setLang("ar");
+    } else if (userLang.startsWith("fr")) {
+      setLang("fr");
+    } else {
+      setLang("en");
+    }
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!divRef.current) return;
@@ -13,19 +50,22 @@ export function SpotlightQuote() {
     setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
 
+  const currentQuote = QUOTES[lang];
+
   return (
     <div 
       ref={divRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setOpacity(1)}
       onMouseLeave={() => setOpacity(0)}
+      dir={currentQuote.dir}
       className="relative w-full flex-1 min-h-[120px] mt-8 flex flex-col items-center justify-center overflow-hidden cursor-crosshair"
     >
       {/* Background hidden text */}
-      <p className="text-xs md:text-sm font-mono text-slate-800/30 text-center select-none pointer-events-none italic leading-relaxed">
-        "The only truly secure system is one that is powered off, cast in a block of concrete and sealed in a lead-lined room with armed guards - and even then I have my doubts."
+      <p className={cn(currentQuote.fontClass, "text-slate-800/30 text-center select-none pointer-events-none italic leading-relaxed")}>
+        {currentQuote.text}
         <br /><br />
-        <span className="text-slate-800/20">— Gene Spafford</span>
+        <span className="text-slate-800/20">{currentQuote.author}</span>
       </p>
 
       {/* Spotlight revealed text using CSS masking */}
@@ -33,14 +73,14 @@ export function SpotlightQuote() {
         className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center transition-opacity duration-200"
         style={{
           opacity: opacity,
-          WebkitMaskImage: `radial-gradient(140px circle at ${position.x}px ${position.y}px, black 15%, transparent 100%)`,
-          maskImage: `radial-gradient(140px circle at ${position.x}px ${position.y}px, black 15%, transparent 100%)`
+          WebkitMaskImage: `radial-gradient(150px circle at ${position.x}px ${position.y}px, black 15%, transparent 100%)`,
+          maskImage: `radial-gradient(150px circle at ${position.x}px ${position.y}px, black 15%, transparent 100%)`
         }}
       >
-        <p className="text-xs md:text-sm font-mono text-cyan-400 text-center italic leading-relaxed drop-shadow-[0_0_8px_rgba(6,182,212,0.6)]">
-          "The only truly secure system is one that is powered off, cast in a block of concrete and sealed in a lead-lined room with armed guards - and even then I have my doubts."
+        <p className={cn(currentQuote.fontClass, "text-cyan-400 text-center italic leading-relaxed drop-shadow-[0_0_8px_rgba(6,182,212,0.6)]")}>
+          {currentQuote.text}
           <br /><br />
-          <span className="text-cyan-600/80 font-bold">— Gene Spafford</span>
+          <span className="text-cyan-600/80 font-bold">{currentQuote.author}</span>
         </p>
       </div>
     </div>
