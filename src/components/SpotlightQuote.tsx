@@ -101,14 +101,14 @@ export function SpotlightQuote() {
       </div>
 
       {/* Endless Shine revealed text (Mobile/Touch) */}
-      <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center sm:hidden animate-pulse">
-        <div 
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent"
-        />
-        <p className={cn(currentQuote.fontClass, "text-cyan-400/80 text-center italic leading-relaxed drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]")}>
+      <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center sm:hidden">
+        <p 
+          className={cn(currentQuote.fontClass, "text-transparent bg-clip-text bg-gradient-to-r from-slate-600 via-cyan-400 to-slate-600 animate-shimmer text-center italic leading-relaxed")}
+          style={{ backgroundSize: "200% auto" }}
+        >
           {currentQuote.text}
           <br /><br />
-          <span className="text-cyan-600/90 font-bold">{currentQuote.author}</span>
+          <span className="font-bold">{currentQuote.author}</span>
         </p>
       </div>
     </div>
