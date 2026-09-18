@@ -12,6 +12,7 @@ interface TerminalEasterEggProps {
 export function TerminalEasterEgg({ isOpen, onClose }: TerminalEasterEggProps) {
   const [input, setInput] = useState("");
   const [isShaking, setIsShaking] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [history, setHistory] = useState<{ type: "cmd" | "out" | "err", text: string }[]>([
     { type: "out", text: "ANTIGRAVITY OS v9.4.1" },
     { type: "out", text: "Authentication successful. Type 'help' to see available commands." }
@@ -35,6 +36,7 @@ export function TerminalEasterEgg({ isOpen, onClose }: TerminalEasterEggProps) {
     const trimmed = cmd.trim().toLowerCase();
     
     setHistory(prev => [...prev, { type: "cmd", text: cmd }]);
+    setIsProcessing(true);
     
     setTimeout(() => {
       let output = "";
@@ -52,6 +54,7 @@ export function TerminalEasterEgg({ isOpen, onClose }: TerminalEasterEggProps) {
           break;
         case "clear":
           setHistory([]);
+          setIsProcessing(false);
           return;
         case "sudo rm -rf /":
           type = "err";
@@ -61,8 +64,10 @@ export function TerminalEasterEgg({ isOpen, onClose }: TerminalEasterEggProps) {
           break;
         case "exit":
           onClose();
+          setIsProcessing(false);
           return;
         case "":
+          setIsProcessing(false);
           return;
         default:
           type = "err";
@@ -70,11 +75,13 @@ export function TerminalEasterEgg({ isOpen, onClose }: TerminalEasterEggProps) {
       }
       
       setHistory(prev => [...prev, { type, text: output }]);
+      setIsProcessing(false);
+      setTimeout(() => inputRef.current?.focus(), 50);
     }, 300);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !isProcessing) {
       handleCommand(input);
       setInput("");
     }
@@ -102,7 +109,7 @@ export function TerminalEasterEgg({ isOpen, onClose }: TerminalEasterEggProps) {
             <div className="flex items-center justify-between px-4 py-2 bg-slate-900 border-b border-slate-800">
               <div className="flex items-center gap-2 text-slate-400">
                 <TerminalIcon className="w-4 h-4" />
-                <span className="text-xs">root@system:~</span>
+                <span className="text-xs">root@linux:~</span>
               </div>
               <button onClick={onClose} className="text-slate-500 hover:text-red-400 transition-colors">
                 <X className="w-4 h-4" />
@@ -117,24 +124,26 @@ export function TerminalEasterEgg({ isOpen, onClose }: TerminalEasterEggProps) {
             >
               {history.map((line, i) => (
                 <div key={i} className={`whitespace-pre-wrap ${line.type === 'err' ? 'text-red-400' : line.type === 'cmd' ? 'text-slate-300' : 'text-cyan-400'}`}>
-                  {line.type === 'cmd' && <span className="text-emerald-400 mr-2">root@system:~$</span>}
+                  {line.type === 'cmd' && <span className="text-emerald-400 mr-2">root@linux:~$</span>}
                   {line.text}
                 </div>
               ))}
               
-              <div className="flex items-center text-slate-300 mt-1">
-                <span className="text-emerald-400 mr-2 shrink-0">root@system:~$</span>
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  className="bg-transparent outline-none flex-1 w-full text-slate-300 caret-cyan-400"
-                  spellCheck={false}
-                  autoComplete="off"
-                />
-              </div>
+              {!isProcessing && (
+                <div className="flex items-center text-slate-300 mt-1">
+                  <span className="text-emerald-400 mr-2 shrink-0">root@linux:~$</span>
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    className="bg-transparent outline-none flex-1 w-full text-slate-300 caret-cyan-400"
+                    spellCheck={false}
+                    autoComplete="off"
+                  />
+                </div>
+              )}
             </div>
           </motion.div>
         </motion.div>

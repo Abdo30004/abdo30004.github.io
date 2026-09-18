@@ -55,10 +55,13 @@ export function LiveTelemetry() {
           title="System Status"
         >
           <div className="relative flex h-3 w-3 shrink-0">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500 group-hover:scale-125 transition-transform"></span>
+            <span 
+              className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75 group-hover:bg-red-500 transition-colors"
+              style={{ animationDuration: `${Math.max(0.2, 1 - clickCount * 0.2)}s` }}
+            ></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500 group-hover:bg-red-500 group-hover:scale-125 transition-all"></span>
           </div>
-          <span className="font-mono text-xs text-slate-300 tracking-wider select-none">SYSTEM.STATE: <span className="text-cyan-400">ONLINE</span></span>
+          <span className="font-mono text-xs text-slate-300 tracking-wider select-none">SYSTEM.STATE: <span className="text-cyan-400 group-hover:text-red-400 transition-colors">ONLINE</span></span>
         </div>
 
         <div className="flex md:justify-center w-full md:w-1/3 font-mono text-xs text-slate-500 tracking-widest">
