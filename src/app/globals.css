@@ -8,12 +8,18 @@
   --color-cyan-500: #06b6d4;
   --color-cyan-400: #22d3ee;
   
-  --animate-shimmer: shimmer 3s linear infinite;
+  --animate-shimmer-ltr: shimmer-ltr 6s linear infinite;
+  --animate-shimmer-rtl: shimmer-rtl 6s linear infinite;
 }
 
-@keyframes shimmer {
+@keyframes shimmer-ltr {
   0% { background-position: 200% center; }
   100% { background-position: -200% center; }
+}
+
+@keyframes shimmer-rtl {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
 @layer base {

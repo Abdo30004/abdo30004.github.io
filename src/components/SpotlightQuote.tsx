@@ -103,7 +103,11 @@ export function SpotlightQuote() {
       {/* Endless Shine revealed text (Mobile/Touch) */}
       <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center sm:hidden">
         <p 
-          className={cn(currentQuote.fontClass, "text-transparent bg-clip-text bg-gradient-to-r from-slate-600 via-cyan-400 to-slate-600 animate-shimmer text-center italic leading-relaxed")}
+          className={cn(
+            currentQuote.fontClass, 
+            "text-transparent bg-clip-text bg-gradient-to-r from-slate-600 via-cyan-400 to-slate-600 text-center italic leading-relaxed",
+            currentQuote.dir === 'rtl' ? 'animate-shimmer-rtl' : 'animate-shimmer-ltr'
+          )}
           style={{ backgroundSize: "200% auto" }}
         >
           {currentQuote.text}
