@@ -11,11 +11,11 @@ export const siteConfig = {
 };
 
 export const SKILLS = {
-  "Languages": ["TypeScript", "JavaScript", "Python", "Rust", "C"],
-  "Backend": ["Express.js", "Nest.js", "FastAPI", "Flask", "Microservices", "PostgreSQL", "Redis", "MongoDB"],
-  "Infrastructure": ["Docker", "K8s", "Terraform", "GCP", "CI/CD", "Nginx", "Grafana", "Traefik", "HAProxy"],
-  "Security": ["Web Security", "CTF", "Network Security"],
-  "Web Automation": ["Playwright", "Puppeteer", "BeautifulSoup", "Cheerio"]
+  "Languages": ["Python", "TypeScript", "JavaScript", "Rust", "C"],
+  "Backend": ["FastAPI", "Flask", "Nest.js", "Express.js", "PostgreSQL", "MongoDB", "Redis", "Microservices"],
+  "Web Automation": ["Playwright", "Puppeteer", "BeautifulSoup"],
+  "Infrastructure": ["Docker", "K8s", "GCP", "Terraform", "CI/CD", "Nginx", "Traefik", "HAProxy", "Grafana"],
+  "Security": ["Web Security", "Network Security", "CTF"]
 };
 
 export const PROJECTS = [
