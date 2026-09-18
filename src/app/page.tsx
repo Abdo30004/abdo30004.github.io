@@ -125,9 +125,17 @@ export default function Home() {
                     {project.status}
                   </span>
                 </div>
-                <p className="text-sm text-slate-400 mb-4 flex-1 relative z-10">
-                  {project.desc}
-                </p>
+                  <p className="text-sm text-slate-400 mb-4 flex-1 relative z-10">
+                    {project.desc}
+                    {project.blogUrl && (
+                      <span className="block mt-3">
+                        <Link href={project.blogUrl} target="_blank" className="font-mono text-[10px] text-cyan-400/80 hover:text-cyan-300 transition-colors flex items-center gap-1.5 w-max px-2 py-1 bg-cyan-950/30 border border-cyan-500/20 rounded">
+                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse"></span>
+                          [READ_WRITEUP]
+                        </Link>
+                      </span>
+                    )}
+                  </p>
                 <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-800/80 relative z-10">
                   <span className="text-xs font-mono text-slate-500">{project.role}</span>
                   <div className="flex gap-1.5">
