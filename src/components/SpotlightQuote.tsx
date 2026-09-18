@@ -75,7 +75,7 @@ export function SpotlightQuote() {
       onMouseEnter={() => setOpacity(1)}
       onMouseLeave={() => setOpacity(0)}
       dir={currentQuote.dir}
-      className="relative w-full flex-1 min-h-[120px] mt-8 flex flex-col items-center justify-center overflow-hidden cursor-crosshair group"
+      className="relative w-full flex-1 min-h-[120px] flex flex-col items-center justify-center overflow-hidden cursor-crosshair group"
     >
       {/* Background hidden text */}
       <p className={cn(currentQuote.fontClass, "text-slate-800/30 text-center select-none pointer-events-none italic leading-relaxed")}>
