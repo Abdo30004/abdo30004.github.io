@@ -13,8 +13,8 @@ export function TerminalEasterEgg({ isOpen, onClose }: TerminalEasterEggProps) {
   const [input, setInput] = useState("");
   const [isShaking, setIsShaking] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [history, setHistory] = useState<{ type: "cmd" | "out" | "err", text: string }[]>([
-    { type: "out", text: "ANTIGRAVITY OS v9.4.1" },
+  const [history, setHistory] = useState<{ type: "cmd" | "out" | "err", text: string, center?: boolean }[]>([
+    { type: "out", text: "Linux Terminal", center: true },
     { type: "out", text: "Authentication successful. Type 'help' to see available commands." }
   ]);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -123,7 +123,7 @@ export function TerminalEasterEgg({ isOpen, onClose }: TerminalEasterEggProps) {
               onClick={() => inputRef.current?.focus()}
             >
               {history.map((line, i) => (
-                <div key={i} className={`whitespace-pre-wrap ${line.type === 'err' ? 'text-red-400' : line.type === 'cmd' ? 'text-slate-300' : 'text-cyan-400'}`}>
+                <div key={i} className={`whitespace-pre-wrap ${line.type === 'err' ? 'text-red-400' : line.type === 'cmd' ? 'text-slate-300' : 'text-cyan-400'} ${line.center ? 'text-center font-bold tracking-widest mb-2' : ''}`}>
                   {line.type === 'cmd' && <span className="text-emerald-400 mr-2">root@linux:~$</span>}
                   {line.text}
                 </div>
