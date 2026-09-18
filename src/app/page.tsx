@@ -196,58 +196,61 @@ export default function Home() {
             </div>
         </Widget>
 
-        {/* Projects / Deployments */}
-        <Widget className="md:col-span-8" title="Deployment_Logs" icon={Server}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {PROJECTS.map((project, i) => (
-                <div key={i} className="group/item flex flex-col p-4 rounded-lg bg-slate-900/50 border border-slate-800/50 hover:bg-slate-800/80 transition-colors z-10 relative overflow-hidden">
-                  <ProjectBackground projectName={project.name} />
-                  <div className="flex items-start justify-between mb-3 relative z-10">
-                    <Link href={project.url} target="_blank" className="font-display font-medium text-slate-200 group-hover/item:text-cyan-400 transition-colors hover:underline flex items-center gap-1.5">
-                      {project.name}
-                      <ExternalLink className="w-3.5 h-3.5 opacity-50 group-hover/item:opacity-100" />
-                    </Link>
-                    <div className="flex items-center gap-2">
-                      {project.blogUrl && (
-                        <Link href={project.blogUrl} target="_blank" className="font-mono text-[9px] text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-1 px-1.5 py-0.5 bg-cyan-950/50 border border-cyan-500/30 rounded">
-                          <span className="w-1 h-1 rounded-full bg-cyan-500 animate-pulse"></span>
-                          WRITEUP
-                        </Link>
-                      )}
-                      <span className="flex items-center gap-1.5 text-[10px] font-mono text-slate-500 uppercase px-2 py-0.5 rounded-full border border-slate-700/50">
-                        {project.status === 'operational' && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></span>}
-                        {project.status === 'beta' && <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>}
-                        {project.status === 'archived' && <span className="w-1.5 h-1.5 rounded-full bg-slate-500"></span>}
-                        {project.status}
-                      </span>
+        {/* Right Column: Projects & Quote */}
+        <div className="md:col-span-8 flex flex-col gap-6">
+          {/* Projects / Deployments */}
+          <Widget title="Deployment_Logs" icon={Server}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {PROJECTS.map((project, i) => (
+                  <div key={i} className="group/item flex flex-col p-4 rounded-lg bg-slate-900/50 border border-slate-800/50 hover:bg-slate-800/80 transition-colors z-10 relative overflow-hidden">
+                    <ProjectBackground projectName={project.name} />
+                    <div className="flex items-start justify-between mb-3 relative z-10">
+                      <Link href={project.url} target="_blank" className="font-display font-medium text-slate-200 group-hover/item:text-cyan-400 transition-colors hover:underline flex items-center gap-1.5">
+                        {project.name}
+                        <ExternalLink className="w-3.5 h-3.5 opacity-50 group-hover/item:opacity-100" />
+                      </Link>
+                      <div className="flex items-center gap-2">
+                        {project.blogUrl && (
+                          <Link href={project.blogUrl} target="_blank" className="font-mono text-[9px] text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-1 px-1.5 py-0.5 bg-cyan-950/50 border border-cyan-500/30 rounded">
+                            <span className="w-1 h-1 rounded-full bg-cyan-500 animate-pulse"></span>
+                            WRITEUP
+                          </Link>
+                        )}
+                        <span className="flex items-center gap-1.5 text-[10px] font-mono text-slate-500 uppercase px-2 py-0.5 rounded-full border border-slate-700/50">
+                          {project.status === 'operational' && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></span>}
+                          {project.status === 'beta' && <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>}
+                          {project.status === 'archived' && <span className="w-1.5 h-1.5 rounded-full bg-slate-500"></span>}
+                          {project.status}
+                        </span>
+                      </div>
+                    </div>
+                      <p className="text-sm text-slate-400 mb-10 flex-1 relative z-10">
+                        {project.desc}
+                      </p>
+                    <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-800/80 relative z-10">
+                      <span className="text-xs font-mono text-slate-500">{project.role}</span>
+                        <div className="flex gap-1.5">
+                          {project.tags.slice(0, 3).map(tag => {
+                            const TagIcon = SKILL_ICONS[tag];
+                            return (
+                              <span key={tag} className="flex items-center gap-1 text-[10px] font-mono text-slate-400 bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800">
+                                {TagIcon && <TagIcon className="w-3 h-3" />}
+                                {tag}
+                              </span>
+                            );
+                          })}
+                        </div>
                     </div>
                   </div>
-                    <p className="text-sm text-slate-400 mb-10 flex-1 relative z-10">
-                      {project.desc}
-                    </p>
-                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-800/80 relative z-10">
-                    <span className="text-xs font-mono text-slate-500">{project.role}</span>
-                      <div className="flex gap-1.5">
-                        {project.tags.slice(0, 3).map(tag => {
-                          const TagIcon = SKILL_ICONS[tag];
-                          return (
-                            <span key={tag} className="flex items-center gap-1 text-[10px] font-mono text-slate-400 bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800">
-                              {TagIcon && <TagIcon className="w-3 h-3" />}
-                              {tag}
-                            </span>
-                          );
-                        })}
-                      </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-        </Widget>
+                ))}
+              </div>
+          </Widget>
 
-        {/* Standalone Full-Width Quote Box */}
-        <Widget className="md:col-span-12 p-0 overflow-hidden min-h-[160px] flex items-center justify-center">
-          <SpotlightQuote />
-        </Widget>
+          {/* Standalone Quote Box */}
+          <Widget className="flex-1 flex flex-col p-0 overflow-hidden min-h-[160px]">
+            <SpotlightQuote />
+          </Widget>
+        </div>
 
       </motion.div>
       

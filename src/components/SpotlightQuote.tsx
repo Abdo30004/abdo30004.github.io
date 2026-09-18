@@ -78,11 +78,10 @@ export function SpotlightQuote() {
       className="relative w-full flex-1 min-h-[120px] flex flex-col items-center justify-center overflow-hidden cursor-crosshair group"
     >
       {/* Background hidden text */}
-      <p className={cn(currentQuote.fontClass, "text-slate-800/30 text-center select-none pointer-events-none italic leading-relaxed")}>
-        {currentQuote.text}
-        <br /><br />
-        <span className="text-slate-800/20">{currentQuote.author}</span>
-      </p>
+      <div className={cn(currentQuote.fontClass, "flex flex-col items-center justify-center gap-3 text-slate-800/30 text-center select-none pointer-events-none italic leading-relaxed")}>
+        <p>{currentQuote.text}</p>
+        <span className="text-slate-800/20 font-bold">{currentQuote.author}</span>
+      </div>
 
       {/* Spotlight revealed text using CSS masking (Mouse) */}
       <div
@@ -93,27 +92,25 @@ export function SpotlightQuote() {
           maskImage: `radial-gradient(150px circle at ${position.x}px ${position.y}px, black 15%, transparent 100%)`
         }}
       >
-        <p className={cn(currentQuote.fontClass, "text-cyan-400 text-center italic leading-relaxed drop-shadow-[0_0_8px_rgba(6,182,212,0.6)]")}>
-          {currentQuote.text}
-          <br /><br />
+        <div className={cn(currentQuote.fontClass, "flex flex-col items-center justify-center gap-3 text-cyan-400 text-center italic leading-relaxed drop-shadow-[0_0_8px_rgba(6,182,212,0.6)]")}>
+          <p>{currentQuote.text}</p>
           <span className="text-cyan-600/80 font-bold">{currentQuote.author}</span>
-        </p>
+        </div>
       </div>
 
       {/* Endless Shine revealed text (Mobile/Touch) */}
       <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center sm:hidden">
-        <p 
+        <div 
           className={cn(
             currentQuote.fontClass, 
-            "text-transparent bg-clip-text bg-gradient-to-r from-slate-600 via-cyan-400 to-slate-600 text-center italic leading-relaxed",
+            "flex flex-col items-center justify-center gap-3 text-transparent bg-clip-text bg-gradient-to-r from-slate-600 via-cyan-400 to-slate-600 text-center italic leading-relaxed",
             currentQuote.dir === 'rtl' ? 'animate-shimmer-rtl' : 'animate-shimmer-ltr'
           )}
           style={{ backgroundSize: "200% auto" }}
         >
-          {currentQuote.text}
-          <br /><br />
+          <p>{currentQuote.text}</p>
           <span className="font-bold">{currentQuote.author}</span>
-        </p>
+        </div>
       </div>
     </div>
   );
