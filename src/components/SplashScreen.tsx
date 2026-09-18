@@ -21,6 +21,14 @@ export function SplashScreen({ onComplete }: { onComplete: () => void }) {
   const [visibleLines, setVisibleLines] = useState<number>(0);
 
   useEffect(() => {
+    // Lock body scroll on mobile
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
+  useEffect(() => {
     let currentLine = 0;
     const interval = setInterval(() => {
       if (currentLine < BOOT_SEQUENCE.length) {
@@ -44,7 +52,7 @@ export function SplashScreen({ onComplete }: { onComplete: () => void }) {
       animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
       exit={{ opacity: 0, filter: "blur(12px)", scale: 1.05 }}
       transition={{ duration: 1.2, ease: "easeInOut" }}
-      className="fixed inset-0 z-[100] bg-slate-950 flex flex-col justify-center items-center p-6 font-mono text-[10px] md:text-xs overflow-hidden"
+      className="fixed inset-0 z-[100] bg-slate-950 flex flex-col justify-center items-center p-6 font-mono text-[10px] md:text-xs overflow-hidden touch-none"
     >
       <div className="max-w-2xl w-full space-y-2 opacity-90">
         {BOOT_SEQUENCE.slice(0, visibleLines).map((line, i) => {
