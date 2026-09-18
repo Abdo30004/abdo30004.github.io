@@ -3,7 +3,7 @@
 import { 
   Terminal, Server, 
   Mail, Cpu, GitMerge, CheckCircle2, Loader2, CircleDashed,
-  Code2, Database, Cloud, Shield, Network, ShieldAlert, Flag, BrainCircuit
+  Code2, Database, Cloud, Shield, Network, ShieldAlert, Flag, BrainCircuit, Bot
 } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -22,14 +22,16 @@ import {
   SiExpress, SiNestjs, SiFastapi, SiFlask, 
   SiDocker, SiKubernetes, SiTerraform, SiGooglecloud, SiGithubactions, SiNginx, SiGrafana,
   SiOwasp, SiHackthebox, SiWireshark,
-  SiReact, SiTraefikproxy, SiPostgresql
+  SiReact, SiTraefikproxy, SiPostgresql,
+  SiRedis, SiMongodb, SiPuppeteer, SiCheerio
 } from "react-icons/si";
 
 const CATEGORY_ICONS: Record<string, React.ElementType> = {
   "Languages": Code2,
   "Backend": Database,
   "Infrastructure": Cloud,
-  "Security": Shield
+  "Security": Shield,
+  "Web Automation": Bot
 };
 
 const SKILL_ICONS: Record<string, React.ElementType> = {
@@ -43,6 +45,9 @@ const SKILL_ICONS: Record<string, React.ElementType> = {
   "FastAPI": SiFastapi,
   "Flask": SiFlask,
   "Microservices": Network,
+  "PostgreSQL": SiPostgresql,
+  "Redis": SiRedis,
+  "MongoDB": SiMongodb,
   "Docker": SiDocker,
   "K8s": SiKubernetes,
   "Terraform": SiTerraform,
@@ -50,12 +55,16 @@ const SKILL_ICONS: Record<string, React.ElementType> = {
   "CI/CD": SiGithubactions,
   "Nginx": SiNginx,
   "Grafana": SiGrafana,
+  "Traefik": SiTraefikproxy,
+  "HAProxy": Network,
   "Web Security": SiOwasp,
   "CTF": Flag,
   "Network Security": SiWireshark,
+  "Playwright": Terminal,
+  "Puppeteer": SiPuppeteer,
+  "BeautifulSoup": Terminal,
+  "Cheerio": SiCheerio,
   "React": SiReact,
-  "Traefik": SiTraefikproxy,
-  "PostgreSQL": SiPostgresql,
   "Terminal": Terminal,
   "IoT": Cpu,
   "AI": BrainCircuit,
