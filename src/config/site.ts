@@ -31,7 +31,7 @@ export const PROJECTS = [
   },
   {
     name: "CVE Monitoring Tool",
-    role: "Fullstack",
+    role: "Monitoring",
     date: "2025",
     desc: "Automated vulnerability tracking pipeline with OpenAPI documentation and SQLAlchemy persistence.",
     tags: ["FastAPI", "Python", "Docker", "PostgreSQL"],
